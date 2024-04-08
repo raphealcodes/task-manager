@@ -1,0 +1,144 @@
+<main class="px-8 sm:px-8">
+  <div class="header-text-content w-full">
+    <div class="flex items-center">
+      <h2>Task Management</h2>
+      <div class="btn-wrapper ml-3">
+        <button class="action-btn plus" (click)="createTask()"><i class="ri-add-fill"></i> Add Task</button>
+      </div>
+    </div>
+  </div>
+
+
+
+
+    <div class="row mt-10">
+      <form class="inline-form" [formGroup]="myForm">
+      <div class="filter-wrapper">
+          <div  class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 gap-5 items-center">
+            <div class="w-full">
+              <span class="text-gray-700 text-sm">Filter by priority:</span>
+              <mat-form-field appearance="outline" class="w-full" >
+                <mat-select
+                  formControlName="priority"
+                  (selectionChange)="filter('priority', $event)"
+                >
+                <!-- <mat-option value="" selected>All</mat-option> -->
+                  <mat-option *ngFor="let p of priorityData" value="{{ p }}">{{
+                    p | titlecase
+                  }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div>
+              <span class="text-gray-700 text-sm">Filter by status:</span>
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-select
+                  formControlName="status"
+                  (selectionChange)="filter('status', $event)"
+                >
+                <!-- <mat-option value="" selected>All</mat-option> -->
+                  <mat-option *ngFor="let s of statusData" value="{{ s }}">{{
+                    s | titlecase
+                  }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+      </div>
+      </form>
+      <div class="mat-elevation-z8 px-0">
+        <table mat-table [dataSource]="taskDataSource" >
+          <ng-container
+            matColumnDef="{{ column['name'] }}"
+            *ngFor="let column of taskDisplayedColumns"
+          >
+            <th mat-header-cell *matHeaderCellDef>
+              <div [ngSwitch]="column['type']">
+                <div *ngSwitchDefault>{{ column["title"] }}</div>
+              </div>
+            </th>
+            <mat-progress-bar
+              mode="indeterminate"
+              *ngIf="container['taskLoading']"
+            ></mat-progress-bar>
+            <td mat-cell *matCellDef="let element">
+              <div
+                [ngSwitch]="column['type']"
+              >
+                <div *ngSwitchDefault>{{ element[column["name"]] }}</div>
+                <div *ngSwitchCase="'date'">
+                  <div
+                  >
+                    {{ element.due_date | date }}
+                  </div>
+                </div>
+                <div *ngSwitchCase="'priority'" class="status">
+                  <div
+                    [ngClass]="{
+                      low: element.priority === 'low',
+                      medium: element.priority === 'medium',
+                      high: element.priority === 'high'
+                    }"
+                  >
+                    {{ element.priority | titlecase }}
+                  </div>
+                </div>
+                <div *ngSwitchCase="'status'" class="status">
+                  <div
+                    [ngClass]="{
+                      pending: element.status === 'pending',
+                      inProgress: element.status === 'in progress',
+                      completed: element.status === 'completed'
+                    }"
+                  >
+                    {{ element.status | titlecase }}
+                  </div>
+                </div>
+                <div
+                  *ngSwitchCase="'action'"
+                  (click)="$event.stopPropagation()"
+                >
+                  <a
+                  (click)="editTask(element)"
+                  matTooltip="Edit"
+                  aria-label="Button that displays a tooltip when focused or hovered over"
+                    class="header-menu txns-action edit cursor-pointer"
+                  >
+                  <i class="ri-edit-circle-line"></i>
+                  </a>
+                  |
+                  <a
+                  (click)="deleteTask(element)"
+                  matTooltip="Delete"
+                  aria-label="Button that displays a tooltip when focused or hovered over"
+                  class="header-menu txns-action delete cursor-pointer"
+                >
+                <i class="ri-delete-bin-fill"></i>
+                </a>
+                </div>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="taskColumnsToDisp"></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: taskColumnsToDisp"
+            class="pointer"
+          ></tr>
+          <tr class="mat-row" *matNoDataRow>
+            <td
+              class="mat-cell text-center py-3"
+              [attr.colspan]="taskDisplayedColumns.length"
+            >
+              No tasks found.
+            </td>
+          </tr>
+        </table>
+        <div *ngIf="container['taskLoading']" class="mat-spinner-container">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+        <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of tasks"></mat-paginator> -->
+      </div>
+    </div>
+</main>

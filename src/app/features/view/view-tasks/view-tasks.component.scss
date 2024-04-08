@@ -1,0 +1,99 @@
+// table customizations
+.mat-elevation-z8 {
+  overflow-x: auto;
+  box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%)
+}
+
+::ng-deep.mdc-data-table__table,
+table {
+  min-width: 100%;
+  border: 1px solid #f1f1f1 !important;
+  white-space: nowrap;
+  border-spacing: 0;
+  table-layout: fixed;
+  border-bottom: none !important;
+}
+
+::ng-deep.mat-mdc-cell,
+tr td {
+  border-bottom-color: #f1f1f1 !important;
+  border-bottom-width: var(--mat-table-row-item-outline-width, 1px);
+  border-bottom-style: solid;
+  letter-spacing: var(--mat-table-row-item-label-text-tracking);
+  line-height: inherit;
+}
+
+::ng-deep.mat-mdc-header-row,
+thead tr th {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  height: 48px !important;
+  color: #1b1b1b !important;
+  line-height: 20px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  background-color: #f1f1f1 !important;
+}
+
+::ng-deep.mat-mdc-row,
+tr td {
+  height: 48px !important;
+  color: #1b1b1b !important;
+  line-height: 20px !important;
+  font-size: 14px !important;
+}
+
+// ::ng-deep.mat-mdc-paginator-container {
+//   display: flex;
+//   align-items: center;
+//   justify-content: flex-end;
+//   flex-wrap: wrap-reverse;
+//   width: 100%;
+//   min-height: var(--mat-paginator-container-size);
+//   border: 1px solid #f1f1f1 !important;
+// }
+
+// ::ng-deep.mat-mdc-paginator-page-size-label {
+//   margin: 0 4px;
+
+//   color: var(--gray-gray-900, #1b1b1b) !important;
+//   font-size: 12px !important;
+//   font-style: normal !important;
+//   font-weight: 500 !important;
+//   line-height: 16px !important;
+//   letter-spacing: 0.048px !important;
+// }
+
+// ::ng-deep.mat-mdc-paginator-range-label {
+//   margin: 0 24px 0 24px !important;
+//   color: var(--gray-gray-900, #1b1b1b) !important;
+//   font-size: 12px !important;
+//   font-style: normal !important;
+//   font-weight: 500 !important;
+//   line-height: 16px !important;
+//   letter-spacing: 0.048px !important;
+// }
+
+// ::ng-deep.mat-mdc-paginator-page-size {
+//   display: flex;
+//   align-items: baseline;
+//   margin-right: 0px !important;
+// }
+
+// ::ng-deep.mat-mdc-paginator-page-size-select {
+//   margin: 0 !important;
+//   width: 70px !important;
+// }
+
+// ::ng-deep.mat-mdc-paginator .mat-mdc-select-value {
+//   color: var(--gray-gray-900, #1b1b1b) !important;
+//   font-size: 12px !important;
+//   font-style: normal !important;
+//   font-weight: 500 !important;
+//   line-height: 16px !important;
+//   letter-spacing: 0.048px !important;
+// }
+
+
+// table customizations
+

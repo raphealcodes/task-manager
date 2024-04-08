@@ -1,1 +1,320 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$task-manager-primary: mat.define-palette(mat.$indigo-palette);
+$task-manager-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$task-manager-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$task-manager-theme: mat.define-light-theme((
+  color: (
+    primary: $task-manager-primary,
+    accent: $task-manager-accent,
+    warn: $task-manager-warn,
+  ),
+  typography: mat.define-typography-config(),
+  density: 0
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($task-manager-theme);
+
 /* You can add global styles to this file, and also import other style files */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+  --primary: #649AE9;
+  --primary-light: #F4F6F7;
+  --primary-lightest: #EAF2FC;
+  --secondary: #081D3A;
+  --accent: #707070;
+  --white: #fff;
+  --black: #000;
+  --gray: #707070;
+  --gray-lighter: #ADADAE;
+  --red: red;
+  --green: green;
+  --white-white-300: #F1F1F1;
+  --yellow : #efb42e;
+}
+
+
+html,
+body {
+  height: 100%;
+}
+body {
+  background-color: var(--primary-lightest);
+  margin: 0;
+  padding: 50px 0px;
+  box-sizing: border-box;
+  font-family: "Plus Jakarta Sans", "Helvetica Neue", sans-serif;
+}
+
+.main {
+  height: 100%;
+}
+
+// button customizations
+.action-btn {
+  background-color: var(--primary-lightest);
+  width: 100%;
+  // height: 38px;
+  border-radius: 5px;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  padding: 10px 13px 10px 10px;
+  font-size: 14px;
+  &.no {
+    color: var(--yellow);
+    border: 1px solid var(--yellow);
+    background: var(--yellow-yellow-100, #fcf0d5);
+  }
+  &.yes {
+
+  }
+  &.plus {
+  i {
+    font-size: 17px;
+    font-weight: 900;
+  }
+}
+i {
+  font-size: 17px;
+}
+}
+
+.submit-btn {
+  background-color: var(--primary);
+  width: 100%;
+  height: 45px;
+  border-radius: 5px;
+  color: var(--white);
+}
+
+.submit-btn:disabled {
+  background: var(--primary) !important;
+  color: var(--white);
+  opacity: 1 !important;
+  width: 100%;
+}
+// button customizations
+
+// header text customizations
+.header-text-content {
+  h2 {
+     font-weight: 600;
+     font-size: 24px;
+     line-height: 30.24px;
+     color: var(--secondary);
+  }
+
+  p {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20.16px;
+      color: var(--accent);
+  }
+}
+// header text customizations
+
+
+
+
+
+// status customization
+
+.status {
+  // width: auto;
+  .low {
+    width: 40px;
+    color: var(--primary);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0.014px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    background: var(--primary-light);
+  }
+  .medium{
+    width: 67px;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0.014px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    color: var(--yellow);
+    background: var(--yellow-yellow-100, #fcf0d5);
+  }
+
+  .high {
+    width: 46px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    background: var(--red-red-100, #fbdede);
+    color: var(--red);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: 0.014px;
+  }
+
+  .inProgress {
+    color: var(--yellow);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0.014px;
+  }
+
+  .completed {
+    color: var(--green);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0.014px;
+  }
+
+  .pending {
+    color:  var(--accent);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0.014px;
+  }
+}
+
+
+.txns-action {
+    &.edit {
+        i {
+          color: var(--yellow);
+        }
+    }
+
+    &.delete {
+      i {
+         color: var(--red);
+      }
+    }
+}
+
+// status customization
+
+
+.close-button {
+  border: none;
+  background-color: transparent;
+  margin-top: 1px;
+  i {
+    font-size: 34px;
+  }
+}
+
+
+
+// customize the mat-form-field
+
+.mdc-notched-outline__leading {
+  border-color: transparent !important;
+}
+
+.mdc-notched-outline__notch {
+  border-color: transparent !important;
+}
+
+.mdc-notched-outline__trailing {
+  border-color: transparent !important;
+}
+
+.mat-mdc-text-field-wrapper {
+  width: 100% !important;
+  background: #f1f1f1 !important;
+  // height: 48px !important;
+}
+
+.mdc-text-field {
+  border-top-left-radius: 8px !important;
+  border-top-right-radius: 8px !important;
+  border-bottom-right-radius: 8px !important;
+  border-bottom-left-radius: 8px !important;
+  display: inline-flex !important;
+  align-items: baseline !important;
+  padding: 0 16px !important;
+  position: relative !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  will-change: opacity, transform, color !important;
+}
+
+.mat-mdc-form-field-flex {
+  display: inline-flex !important;
+  align-items: baseline !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  // height: 48px !important;
+}
+
+.mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+  // padding-top: 12px !important;
+  // padding-bottom: 12px !important;
+}
+
+.mat-mdc-form-field-infix {
+  min-height: 0 !important;
+}
+
+// .mat-mdc-form-field-bottom-align {
+//   min-height: 0 !important;
+//   height: 0 !important;
+// }
+
+mat-datepicker-toggle {
+  position: absolute;
+  float: right;
+  right: 5px;
+  top: -24px;
+  z-index: 2;
+  cursor: pointer;
+  color: black;
+  font-size: 1.5rem;
+}
+
+.error-wrapper {
+  margin-top: -25px !important;
+}
+
+.error {
+  color: red !important;
+  font-size: 12px !important;
+}
+
+// customize the mat-form-field

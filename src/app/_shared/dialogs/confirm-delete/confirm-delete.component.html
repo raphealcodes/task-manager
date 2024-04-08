@@ -1,0 +1,22 @@
+<div class="px-5">
+  <div class="flex justify-end">
+    <button class="close-button" [mat-dialog-close]="false">
+      <i class="ri-close-line"></i>
+    </button>
+  </div>
+
+  <div class="mb-5">
+    <div class="header-text-content">
+      <h2 class="m-0 text-center">Confirm Delete</h2>
+      <p class="text-center mt-4">Are you sure you want to delete?</p>
+    </div>
+    <div class="flex justify-center mt-4">
+    <div class="btn-wrapper">
+      <button class="action-btn no" [mat-dialog-close]="false">NO</button>
+    </div>
+    <div class="btn-wrapper ml-3">
+      <button class="action-btn yes" (click)="deleteTask()">YES I WANT!</button>
+    </div>
+  </div>
+  </div>
+</div>

@@ -1,0 +1,166 @@
+<div class="px-5">
+  <div class="flex justify-end">
+    <button class="close-button" [mat-dialog-close]="false">
+      <i class="ri-close-line"></i>
+    </button>
+  </div>
+
+  <div class="mb-5">
+    <div class="header-text-content">
+      <h2 class="m-0 text-center">Task Details</h2>
+      <p class="text-center">You will need to provide task information</p>
+    </div>
+
+    <div class="mt-12">
+      <form class="w-full" [formGroup]="taskForm">
+        <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+          <div class="form-group">
+            <label
+              class="block tracking-wide text-gray-700 text-sm mb-1"
+              for="title"
+            >
+              Title
+            </label>
+            <mat-form-field appearance="outline" class="w-full">
+              <input
+                matInput
+                id="title"
+                type="text"
+                placeholder="Enter title"
+                formControlName="title"
+                (input)="controlChanged('title')"
+              />
+            </mat-form-field>
+            <div class="error-wrapper">
+              <span class="error" *ngIf="uiErrors.title != ''">{{
+                uiErrors.title
+              }}</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label
+              class="block tracking-wide text-gray-700 text-sm mb-1"
+              for="description"
+            >
+              Description
+            </label>
+            <mat-form-field appearance="outline" class="w-full">
+              <textarea
+                [rows]="3"
+                matInput
+                id="description"
+                type="text"
+                placeholder="Enter description"
+                formControlName="description"
+                (input)="controlChanged('description')"
+              ></textarea>
+            </mat-form-field>
+            <div class="error-wrapper">
+              <span class="error" *ngIf="uiErrors.description != ''">{{
+                uiErrors.description
+              }}</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label
+              class="block tracking-wide text-gray-700 text-sm mb-1"
+              for="due_date"
+            >
+              Due Date
+            </label>
+            <mat-form-field appearance="outline" class="w-full">
+              <input
+                matInput
+                [matDatepicker]="picker"
+                id="title"
+                type="text"
+                placeholder="MM/DD/YYYY"
+                formControlName="due_date"
+                (input)="controlChanged('due_date')"
+                [min]="now"
+              />
+              <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+              <mat-datepicker-toggle
+
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker (closed)="controlChanged('due_date')"#picker></mat-datepicker>
+            </mat-form-field>
+            <div class="error-wrapper">
+              <span class="error" *ngIf="uiErrors.due_date != ''">{{
+                uiErrors.due_date
+              }}</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label
+              class="block tracking-wide text-gray-700 text-sm mb-1"
+              for="priority"
+            >
+              Priority
+            </label>
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-select
+                formControlName="priority"
+                (selectionChange)="controlChanged('priority')"
+                placeholder="Select priority"
+              >
+                <mat-option *ngFor="let p of priorityData" value="{{ p }}">{{
+                  p | titlecase
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="error-wrapper">
+              <span class="error" *ngIf="uiErrors.priority != ''">{{
+                uiErrors.priority
+              }}</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label
+              class="block tracking-wide text-gray-700 text-sm mb-1"
+              for="priority"
+            >
+              Status
+            </label>
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-select
+                formControlName="status"
+                (selectionChange)="controlChanged('status')"
+                placeholder="Select status"
+              >
+                <mat-option *ngFor="let s of statusData" value="{{ s }}">{{
+                  s | titlecase
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="error-wrapper">
+              <span class="error" *ngIf="uiErrors.status != ''">{{
+                uiErrors.status
+              }}</span>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="button-wrapper flex justify-end mt-8">
+          <button
+            type="submit"
+            class="submit-btn"
+            [disabled]="submitting"
+            (click)=" onSubmit()"
+          >
+          <span class="flex justify-center items-center">Save
+            <app-loader2 *ngIf="submitting"></app-loader2>
+          </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+</div>
